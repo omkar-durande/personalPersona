@@ -1,7 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
-import 'package:personPersona/Screen/appbar.dart';
+import 'package:animationweb/Screen/appbar.dart';
 
 void main() {
   runApp(const MyApp());

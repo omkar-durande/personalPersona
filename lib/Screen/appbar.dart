@@ -1,5 +1,5 @@
-import 'package:personPersona/Screen/home.dart';
-import 'package:personPersona/widget/loadingarc.dart';
+import 'package:animationweb/Screen/home.dart';
+import 'package:animationweb/widget/loadingarc.dart';
 import 'package:flutter/material.dart';
 
 class CustomAppbar extends StatefulWidget {
