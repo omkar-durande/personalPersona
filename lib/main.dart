@@ -96,8 +96,7 @@ class _VideoBackgroundPageState extends State<VideoBackgroundPage> {
                 width: 10,
                 height: 10,
                 decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(0.8),
-                  shape: BoxShape.circle,
+                  color: const Color.fromARGB(255, 24, 22, 12).withOpacity(0.8),
                 ),
               ),
             ),
