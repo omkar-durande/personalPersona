@@ -74,7 +74,13 @@ class _VideoBackgroundPageState extends State<VideoBackgroundPage> {
                 ),
               )
             else
-              const Center(child: CircularProgressIndicator()),
+              Center(
+                child: Container(
+                  height: MediaQuery.of(context).size.height,
+                  width: MediaQuery.of(context).size.width,
+                  decoration: BoxDecoration(color: const Color.fromARGB(31, 33, 34, 15)),
+                ),
+              ),
 
             // Foreground content
             SafeArea(
@@ -96,7 +102,8 @@ class _VideoBackgroundPageState extends State<VideoBackgroundPage> {
                 width: 10,
                 height: 10,
                 decoration: BoxDecoration(
-                  color: const Color.fromARGB(255, 24, 22, 12).withOpacity(0.8),
+                  color: Colors.white.withOpacity(0.8),
+                  shape: BoxShape.circle,
                 ),
               ),
             ),
