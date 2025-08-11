@@ -32,7 +32,7 @@ class _VideoBackgroundPageState extends State<VideoBackgroundPage> {
   @override
   void initState() {
     super.initState();
-    _controller = VideoPlayerController.asset('assets/video/bg3.mp4')
+    _controller = VideoPlayerController.asset('assets/video/bg3(1).mp4')
       ..initialize().then((_) {
         setState(() {
           _isVideoInitialized = true;
