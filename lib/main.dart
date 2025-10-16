@@ -28,6 +28,7 @@ class _VideoBackgroundPageState extends State<VideoBackgroundPage> {
   bool _isVideoInitialized = false;
   Offset _mousepointer = Offset.zero;
   bool _isHovered = true;
+  bool _displayMedialPanel = false;
 
   @override
   void initState() {
@@ -37,9 +38,16 @@ class _VideoBackgroundPageState extends State<VideoBackgroundPage> {
         setState(() {
           _isVideoInitialized = true;
         });
-        _controller.setLooping(true);
+        _controller.setLooping(false);
         _controller.setVolume(0);
         _controller.play();
+        _controller.addListener(() {
+          setState(() {
+            if (_controller.value.position == _controller.value.duration) {
+              _displayMedialPanel = true;
+            }
+          });
+        });
       });
   }
 
@@ -51,6 +59,15 @@ class _VideoBackgroundPageState extends State<VideoBackgroundPage> {
 
   @override
   Widget build(BuildContext context) {
+    //For the Position OF the Omkar Durande Name Length , Width
+
+    double panelLength =
+        MediaQuery.of(context).size.width - ((MediaQuery.of(context).size.width) / 3) * 2;
+    double panelWidth =
+        MediaQuery.of(context).size.height - ((MediaQuery.of(context).size.height) / 3) * 2;
+    double positionLeft = ((MediaQuery.of(context).size.width) / 3);
+    double positionTop = ((MediaQuery.of(context).size.height - panelWidth) / 3);
+
     return Scaffold(
       backgroundColor: Colors.transparent,
       body: MouseRegion(
@@ -107,6 +124,43 @@ class _VideoBackgroundPageState extends State<VideoBackgroundPage> {
                 ),
               ),
             ),
+            if (_displayMedialPanel)
+              Positioned(
+                top: positionTop,
+                left: positionLeft,
+                child: Container(
+                  height: panelWidth,
+                  width: panelLength,
+                  decoration: BoxDecoration(
+                    color: Colors.black.withOpacity(0.3),
+                    borderRadius: BorderRadius.circular(20),
+                    border: Border.all(color: Colors.white.withOpacity(0.2), width: 1),
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Omkar Durande',
+                        style: TextStyle(
+                          color: Colors.white.withOpacity(0.8),
+                          fontSize: panelLength / 10,
+                          fontWeight: FontWeight.bold,
+                          letterSpacing: 2,
+                        ),
+                      ),
+                      SizedBox(height: panelWidth / 30),
+                      Text(
+                        'Flutter Developer | UI/UX Enthusiast',
+                        style: TextStyle(
+                          color: Colors.white.withOpacity(0.6),
+                          fontSize: panelLength / 25,
+                          letterSpacing: 1.5,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
           ],
         ),
       ),
