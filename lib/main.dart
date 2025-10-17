@@ -2,6 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 import 'package:animationweb/Screen/appbar.dart';
+import 'dart:html' as html;
 
 void main() {
   runApp(const MyApp());
@@ -30,9 +31,16 @@ class _VideoBackgroundPageState extends State<VideoBackgroundPage> {
   bool _isHovered = true;
   bool _displayMedialPanel = false;
 
+  void disableRightClick() {
+    html.document.onContextMenu.listen((event) {
+      event.preventDefault();
+    });
+  }
+
   @override
   void initState() {
     super.initState();
+    disableRightClick();
     _controller = VideoPlayerController.asset('assets/video/bg3(2).mp4')
       ..initialize().then((_) {
         setState(() {
@@ -78,132 +86,139 @@ class _VideoBackgroundPageState extends State<VideoBackgroundPage> {
             _mousepointer = event.position;
           });
         },
-        child: Stack(
-          children: [
-            // Background Video
-            if (_isVideoInitialized)
-              SizedBox.expand(
-                child: FittedBox(
-                  fit: BoxFit.cover,
-                  child: SizedBox(
-                    width: _controller.value.size.width,
-                    height: _controller.value.size.height,
-                    child: VideoPlayer(_controller),
+        child: Listener(
+          onPointerDown: (event) {
+            if (event.kind == PointerDeviceKind.mouse && event.buttons == kSecondaryMouseButton) {
+              // Right-click detected, ignore
+            }
+          },
+          child: Stack(
+            children: [
+              // Background Video
+              if (_isVideoInitialized)
+                SizedBox.expand(
+                  child: FittedBox(
+                    fit: BoxFit.cover,
+                    child: SizedBox(
+                      width: _controller.value.size.width,
+                      height: _controller.value.size.height,
+                      child: VideoPlayer(_controller),
+                    ),
+                  ),
+                )
+              else
+                Center(
+                  child: Container(
+                    height: MediaQuery.of(context).size.height,
+                    width: MediaQuery.of(context).size.width,
+                    decoration: BoxDecoration(color: const Color.fromARGB(31, 33, 34, 15)),
                   ),
                 ),
-              )
-            else
-              Center(
-                child: Container(
-                  height: MediaQuery.of(context).size.height,
-                  width: MediaQuery.of(context).size.width,
-                  decoration: BoxDecoration(color: const Color.fromARGB(31, 33, 34, 15)),
-                ),
+              Container(
+                // color: Colors.black.withOpacity(0.4), // 0.5 = 50% darkness
               ),
-            Container(
-              // color: Colors.black.withOpacity(0.4), // 0.5 = 50% darkness
-            ),
-            // Foreground content
-            SafeArea(
-              child: Column(
-                children: [
-                  const SizedBox(height: 20),
-                  Row(mainAxisAlignment: MainAxisAlignment.center, children: [CustomAppbar()]),
-
-                  // Add more content here
-                ],
-              ),
-            ),
-            AnimatedPositioned(
-              duration: const Duration(milliseconds: 200), // increase this for more delay
-              curve: Curves.easeOut,
-              left: _mousepointer.dx - 10,
-              top: _mousepointer.dy - 10,
-              child: Container(
-                width: 10,
-                height: 10,
-                decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(0.8),
-                  shape: BoxShape.circle,
-                ),
-              ),
-            ),
-
-            Positioned(
-              top: positionTop,
-              left: positionLeft,
-              child: Container(
-                height: panelWidth,
-                width: panelLength,
-                decoration: BoxDecoration(
-                  color: Colors.black.withOpacity(0.6),
-                  borderRadius: BorderRadius.circular(20),
-                  border: Border.all(color: Colors.white.withOpacity(0.2), width: 1),
-                ),
+              // Foreground content
+              SafeArea(
                 child: Column(
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        SizedBox(height: 20, width: panelLength * 0.4),
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            //SizedBox(height: 20),
-                            Container(
-                              width: panelLength - panelLength * 0.49,
-                              height: panelWidth - 2.5,
-                              decoration: BoxDecoration(
-                                color: Colors.black.withOpacity(0.5),
-                                borderRadius: BorderRadius.circular(10),
-                                border: Border.all(color: Colors.transparent, width: 0.5),
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.all(20.0),
-                                child: Column(
-                                  children: [
-                                    Text(
-                                      'Omkar Durande',
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 42,
-                                        fontWeight: FontWeight.w800,
-                                        fontFamily: 'Montserrat',
-                                        shadows: [
-                                          Shadow(
-                                            offset: Offset(2, 2),
-                                            blurRadius: 6,
-                                            color: Colors.black.withOpacity(0.7),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    SizedBox(height: 20),
-                                    Text(
-                                      'I am a passionate developer with a keen interest in exploring and mastering various technologies. I have experience in Flutter for building mobile applications, and I am currently expanding my knowledge in Artificial Intelligence and Machine Learning. Additionally, I have learned Django for web development, which enables me to create full-stack solutions. I am enthusiastic about combining these skills to build innovative and efficient applications.',
-                                      style: TextStyle(
-                                        color: Colors.white.withOpacity(0.8),
-                                        fontSize: 16,
-                                        letterSpacing: 2.0,
+                    const SizedBox(height: 20),
+                    Row(mainAxisAlignment: MainAxisAlignment.center, children: [CustomAppbar()]),
 
-                                        fontWeight: FontWeight.w100,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-
-                            //SizedBox(height: 20),
-                          ],
-                        ),
-                      ],
-                    ),
+                    // Add more content here
                   ],
                 ),
               ),
-            ),
-          ],
+              AnimatedPositioned(
+                duration: const Duration(milliseconds: 200), // increase this for more delay
+                curve: Curves.easeOut,
+                left: _mousepointer.dx - 10,
+                top: _mousepointer.dy - 10,
+                child: Container(
+                  width: 10,
+                  height: 10,
+                  decoration: BoxDecoration(
+                    color: Colors.white.withOpacity(0.8),
+                    shape: BoxShape.circle,
+                  ),
+                ),
+              ),
+
+              Positioned(
+                top: positionTop,
+                left: positionLeft,
+                child: Container(
+                  height: panelWidth,
+                  width: panelLength,
+                  decoration: BoxDecoration(
+                    color: Colors.black.withOpacity(0.6),
+                    borderRadius: BorderRadius.circular(20),
+                    border: Border.all(color: Colors.white.withOpacity(0.2), width: 1),
+                  ),
+                  child: Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          SizedBox(height: 20, width: panelLength * 0.4),
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              //SizedBox(height: 20),
+                              Container(
+                                width: panelLength - panelLength * 0.49,
+                                height: panelWidth - 2.5,
+                                decoration: BoxDecoration(
+                                  color: Colors.black.withOpacity(0.5),
+                                  borderRadius: BorderRadius.circular(10),
+                                  border: Border.all(color: Colors.transparent, width: 0.5),
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(20.0),
+                                  child: Column(
+                                    children: [
+                                      Text(
+                                        'Omkar Durande',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 42,
+                                          fontWeight: FontWeight.w800,
+                                          fontFamily: 'Montserrat',
+                                          shadows: [
+                                            Shadow(
+                                              offset: Offset(2, 2),
+                                              blurRadius: 6,
+                                              color: Colors.black.withOpacity(0.7),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      SizedBox(height: 20),
+                                      Text(
+                                        'I am a passionate developer with a keen interest in exploring and mastering various technologies. I have experience in Flutter for building mobile applications, and I am currently expanding my knowledge in Artificial Intelligence and Machine Learning. Additionally, I have learned Django for web development, which enables me to create full-stack solutions. I am enthusiastic about combining these skills to build innovative and efficient applications.',
+                                        style: TextStyle(
+                                          color: Colors.white.withOpacity(0.8),
+                                          fontSize: 16,
+                                          letterSpacing: 2.0,
+
+                                          fontWeight: FontWeight.w100,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+
+                              //SizedBox(height: 20),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
