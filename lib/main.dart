@@ -69,6 +69,9 @@ class _VideoBackgroundPageState extends State<VideoBackgroundPage> {
   @override
   Widget build(BuildContext context) {
     //For the Position OF the Omkar Durande Name Length , Width
+    double width = MediaQuery.of(context).size.width;
+
+    double height = MediaQuery.of(context).size.height;
 
     double positionLeft = ((MediaQuery.of(context).size.width) / 10);
     double positionTop = ((MediaQuery.of(context).size.height) / 8);
@@ -154,91 +157,169 @@ class _VideoBackgroundPageState extends State<VideoBackgroundPage> {
                     borderRadius: BorderRadius.circular(20),
                     border: Border.all(color: Colors.white.withOpacity(0.2), width: 1),
                   ),
-                  child: Column(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          SizedBox(height: 20, width: panelLength * 0.4),
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              //SizedBox(height: 20),
-                              Container(
-                                width: panelLength - panelLength * 0.49,
-                                height: panelWidth - 2.5,
-                                decoration: BoxDecoration(
-                                  color: Colors.black.withOpacity(0.5),
-                                  borderRadius: BorderRadius.circular(10),
-                                  border: Border.all(color: Colors.transparent, width: 0.5),
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(20.0),
-                                  child: Column(
-                                    children: [
-                                      LayoutBuilder(
-                                        builder: (context, constraints) {
-                                          double fontSize;
-                                          if (MediaQuery.of(context).size.width > 1000) {
-                                            fontSize = 42; // Desktop
-                                          } else if (MediaQuery.of(context).size.width > 600) {
-                                            fontSize = 28; // Tablet
-                                          } else {
-                                            fontSize = 16; // Mobile
-                                          }
 
-                                          return Text(
-                                            'Omkar Durande',
-                                            style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: fontSize,
-                                              fontWeight: FontWeight.w800,
-                                              fontFamily: 'Montserrat',
-                                              shadows: [
-                                                Shadow(
-                                                  offset: Offset(2, 2),
-                                                  blurRadius: 6,
-                                                  color: Colors.black.withOpacity(0.7),
-                                                ),
-                                              ],
-                                            ),
-                                          );
-                                        },
+                  child: (width > 800 && height > 600)
+                      ? Column(
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                SizedBox(height: 20, width: panelLength * 0.4),
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    //SizedBox(height: 20),
+                                    Container(
+                                      width: panelLength - panelLength * 0.49,
+                                      height: panelWidth - 2.5,
+                                      decoration: BoxDecoration(
+                                        color: Colors.black.withOpacity(0.5),
+                                        borderRadius: BorderRadius.circular(10),
+                                        border: Border.all(color: Colors.transparent, width: 0.5),
                                       ),
-                                      SizedBox(height: 20),
-                                      LayoutBuilder(
-                                        builder: (context, constraints) {
-                                          double fontSize;
-                                          if (MediaQuery.of(context).size.width > 1200) {
-                                            fontSize = 16; // Desktop
-                                          } else if (MediaQuery.of(context).size.width > 600) {
-                                            fontSize = 12; // Table
-                                          } else {
-                                            fontSize = 12; // Mobile
-                                          }
-                                          return Text(
-                                            'I am a passionate developer with a keen interest in exploring and mastering various technologies. I have experience in Flutter for building mobile applications, and I am currently expanding my knowledge in Artificial Intelligence and Machine Learning. Additionally, I have learned Django for web development, which enables me to create full-stack solutions. I am enthusiastic about combining these skills to build innovative and efficient applications.',
-                                            style: TextStyle(
-                                              color: Colors.white.withOpacity(0.8),
-                                              fontSize: fontSize,
-                                              letterSpacing: 2.0,
-                                              fontWeight: FontWeight.w100,
-                                            ),
-                                          );
-                                        },
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(20.0),
+                                        child: Column(
+                                          children: [
+                                            LayoutBuilder(
+                                              builder: (context, constraints) {
+                                                double fontSize;
+                                                if (MediaQuery.of(context).size.width > 1000) {
+                                                  fontSize = 42; // Desktop
+                                                } else if (MediaQuery.of(context).size.width >
+                                                    600) {
+                                                  fontSize = 28; // Tablet
+                                                } else {
+                                                  fontSize = 16; // Mobile
+                                                }
 
-                              //SizedBox(height: 20),
-                            ],
+                                                return Text(
+                                                  'Omkar Durande',
+                                                  style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontSize: fontSize,
+                                                    fontWeight: FontWeight.w800,
+                                                    fontFamily: 'Montserrat',
+                                                    shadows: [
+                                                      Shadow(
+                                                        offset: Offset(2, 2),
+                                                        blurRadius: 6,
+                                                        color: Colors.black.withOpacity(0.7),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                );
+                                              },
+                                            ),
+                                            SizedBox(height: 20),
+                                            LayoutBuilder(
+                                              builder: (context, constraints) {
+                                                double fontSize;
+                                                if (MediaQuery.of(context).size.width > 1200) {
+                                                  fontSize = 16; // Desktop
+                                                } else if (MediaQuery.of(context).size.width >
+                                                    600) {
+                                                  fontSize = 12; // Table
+                                                } else {
+                                                  fontSize = 12; // Mobile
+                                                }
+                                                return Text(
+                                                  'I am a passionate developer with a keen interest in exploring and mastering various technologies. I have experience in Flutter for building mobile applications, and I am currently expanding my knowledge in Artificial Intelligence and Machine Learning. Additionally, I have learned Django for web development, which enables me to create full-stack solutions. I am enthusiastic about combining these skills to build innovative and efficient applications.',
+                                                  style: TextStyle(
+                                                    color: Colors.white.withOpacity(0.8),
+                                                    fontSize: fontSize,
+                                                    letterSpacing: 2.0,
+                                                    fontWeight: FontWeight.w100,
+                                                  ),
+                                                );
+                                              },
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+
+                                    //SizedBox(height: 20),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ],
+                        )
+                      : Container(
+                          height: panelWidth, // keep your panel height limit
+                          width: panelLength,
+                          decoration: BoxDecoration(
+                            color: Colors.black.withOpacity(0.6),
+                            borderRadius: BorderRadius.circular(20),
+                            border: Border.all(color: Colors.white.withOpacity(0.2), width: 1),
                           ),
-                        ],
-                      ),
-                    ],
-                  ),
+                          clipBehavior: Clip.hardEdge, // ensures rounded edges still apply
+                          child: SingleChildScrollView(
+                            padding: const EdgeInsets.all(16),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                SizedBox(height: 220, width: 50),
+
+                                LayoutBuilder(
+                                  builder: (context, constraints) {
+                                    double fontSize;
+                                    if (width > 1000) {
+                                      fontSize = 42; // Desktop
+                                    } else if (width > 600) {
+                                      fontSize = 28; // Tablet
+                                    } else {
+                                      fontSize = 16; // Mobile
+                                    }
+
+                                    return Text(
+                                      'Omkar Durande',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: fontSize,
+                                        fontWeight: FontWeight.w800,
+                                        fontFamily: 'Montserrat',
+                                        shadows: [
+                                          Shadow(
+                                            offset: Offset(2, 2),
+                                            blurRadius: 6,
+                                            color: Colors.black.withOpacity(0.7),
+                                          ),
+                                        ],
+                                      ),
+                                      textAlign: TextAlign.center,
+                                    );
+                                  },
+                                ),
+                                const SizedBox(height: 20),
+                                LayoutBuilder(
+                                  builder: (context, constraints) {
+                                    double fontSize;
+                                    if (width > 1200) {
+                                      fontSize = 16; // Desktop
+                                    } else if (width > 600) {
+                                      fontSize = 13; // Tablet
+                                    } else {
+                                      fontSize = 12; // Mobile
+                                    }
+                                    return Text(
+                                      'I am a passionate developer with a keen interest in exploring and mastering various technologies. I have experience in Flutter for building mobile applications, and I am currently expanding my knowledge in Artificial Intelligence and Machine Learning. Additionally, I have learned Django for web development, which enables me to create full-stack solutions. I am enthusiastic about combining these skills to build innovative and efficient applications.',
+                                      style: TextStyle(
+                                        color: Colors.white.withOpacity(0.8),
+                                        fontSize: fontSize,
+                                        letterSpacing: 2.0,
+                                        fontWeight: FontWeight.w100,
+                                      ),
+                                      textAlign: TextAlign.center,
+                                    );
+                                  },
+                                ),
+                                const SizedBox(height: 40), // add some extra spacing at the end
+                              ],
+                            ),
+                          ),
+                        ),
                 ),
               ),
             ],
