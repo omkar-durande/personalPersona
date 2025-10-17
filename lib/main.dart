@@ -180,7 +180,7 @@ class _VideoBackgroundPageState extends State<VideoBackgroundPage> {
                                         'Omkar Durande',
                                         style: TextStyle(
                                           color: Colors.white,
-                                          fontSize: 42,
+                                          fontSize:  MediaQuery.of(context).size.width * 0.04,
                                           fontWeight: FontWeight.w800,
                                           fontFamily: 'Montserrat',
                                           shadows: [
@@ -197,7 +197,7 @@ class _VideoBackgroundPageState extends State<VideoBackgroundPage> {
                                         'I am a passionate developer with a keen interest in exploring and mastering various technologies. I have experience in Flutter for building mobile applications, and I am currently expanding my knowledge in Artificial Intelligence and Machine Learning. Additionally, I have learned Django for web development, which enables me to create full-stack solutions. I am enthusiastic about combining these skills to build innovative and efficient applications.',
                                         style: TextStyle(
                                           color: Colors.white.withOpacity(0.8),
-                                          fontSize: 16,
+                                          fontSize:  MediaQuery.of(context).size.width * 0.03,
                                           letterSpacing: 2.0,
 
                                           fontWeight: FontWeight.w100,
