@@ -176,32 +176,56 @@ class _VideoBackgroundPageState extends State<VideoBackgroundPage> {
                                   padding: const EdgeInsets.all(20.0),
                                   child: Column(
                                     children: [
-                                      Text(
-                                        'Omkar Durande',
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize:  MediaQuery.of(context).size.width * 0.04,
-                                          fontWeight: FontWeight.w800,
-                                          fontFamily: 'Montserrat',
-                                          shadows: [
-                                            Shadow(
-                                              offset: Offset(2, 2),
-                                              blurRadius: 6,
-                                              color: Colors.black.withOpacity(0.7),
+                                      LayoutBuilder(
+                                        builder: (context, constraints) {
+                                          double fontSize;
+                                          if (MediaQuery.of(context).size.width > 1000) {
+                                            fontSize = 42; // Desktop
+                                          } else if (MediaQuery.of(context).size.width > 600) {
+                                            fontSize = 28; // Tablet
+                                          } else {
+                                            fontSize = 16; // Mobile
+                                          }
+
+                                          return Text(
+                                            'Omkar Durande',
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: fontSize,
+                                              fontWeight: FontWeight.w800,
+                                              fontFamily: 'Montserrat',
+                                              shadows: [
+                                                Shadow(
+                                                  offset: Offset(2, 2),
+                                                  blurRadius: 6,
+                                                  color: Colors.black.withOpacity(0.7),
+                                                ),
+                                              ],
                                             ),
-                                          ],
-                                        ),
+                                          );
+                                        },
                                       ),
                                       SizedBox(height: 20),
-                                      Text(
-                                        'I am a passionate developer with a keen interest in exploring and mastering various technologies. I have experience in Flutter for building mobile applications, and I am currently expanding my knowledge in Artificial Intelligence and Machine Learning. Additionally, I have learned Django for web development, which enables me to create full-stack solutions. I am enthusiastic about combining these skills to build innovative and efficient applications.',
-                                        style: TextStyle(
-                                          color: Colors.white.withOpacity(0.8),
-                                          fontSize:  MediaQuery.of(context).size.width * 0.03,
-                                          letterSpacing: 2.0,
-
-                                          fontWeight: FontWeight.w100,
-                                        ),
+                                      LayoutBuilder(
+                                        builder: (context, constraints) {
+                                          double fontSize;
+                                          if (MediaQuery.of(context).size.width > 1200) {
+                                            fontSize = 16; // Desktop
+                                          } else if (MediaQuery.of(context).size.width > 600) {
+                                            fontSize = 12; // Table
+                                          } else {
+                                            fontSize = 12; // Mobile
+                                          }
+                                          return Text(
+                                            'I am a passionate developer with a keen interest in exploring and mastering various technologies. I have experience in Flutter for building mobile applications, and I am currently expanding my knowledge in Artificial Intelligence and Machine Learning. Additionally, I have learned Django for web development, which enables me to create full-stack solutions. I am enthusiastic about combining these skills to build innovative and efficient applications.',
+                                            style: TextStyle(
+                                              color: Colors.white.withOpacity(0.8),
+                                              fontSize: fontSize,
+                                              letterSpacing: 2.0,
+                                              fontWeight: FontWeight.w100,
+                                            ),
+                                          );
+                                        },
                                       ),
                                     ],
                                   ),
