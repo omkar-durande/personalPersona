@@ -38,9 +38,10 @@ class _VideoBackgroundPageState extends State<VideoBackgroundPage> {
         setState(() {
           _isVideoInitialized = true;
         });
-        _controller.setLooping(false);
+        _controller.setLooping(true);
         _controller.setVolume(0);
         _controller.play();
+        _controller.setPlaybackSpeed(2.0);
         _controller.addListener(() {
           setState(() {
             if (_controller.value.position == _controller.value.duration) {
@@ -61,12 +62,13 @@ class _VideoBackgroundPageState extends State<VideoBackgroundPage> {
   Widget build(BuildContext context) {
     //For the Position OF the Omkar Durande Name Length , Width
 
-    double panelLength =
-        MediaQuery.of(context).size.width - ((MediaQuery.of(context).size.width) / 3) * 2;
+    double positionLeft = ((MediaQuery.of(context).size.width) / 10);
+    double positionTop = ((MediaQuery.of(context).size.height) / 8);
     double panelWidth =
-        MediaQuery.of(context).size.height - ((MediaQuery.of(context).size.height) / 3) * 2;
-    double positionLeft = ((MediaQuery.of(context).size.width) / 3);
-    double positionTop = ((MediaQuery.of(context).size.height - panelWidth) / 3);
+        MediaQuery.of(context).size.height -
+        (2 * positionTop); // ((MediaQuery.of(context).size.height) / 3);
+
+    double panelLength = MediaQuery.of(context).size.width - 2 * positionLeft;
 
     return Scaffold(
       backgroundColor: Colors.transparent,
@@ -98,7 +100,9 @@ class _VideoBackgroundPageState extends State<VideoBackgroundPage> {
                   decoration: BoxDecoration(color: const Color.fromARGB(31, 33, 34, 15)),
                 ),
               ),
-
+            Container(
+              // color: Colors.black.withOpacity(0.4), // 0.5 = 50% darkness
+            ),
             // Foreground content
             SafeArea(
               child: Column(
@@ -124,43 +128,81 @@ class _VideoBackgroundPageState extends State<VideoBackgroundPage> {
                 ),
               ),
             ),
-            if (_displayMedialPanel)
-              Positioned(
-                top: positionTop,
-                left: positionLeft,
-                child: Container(
-                  height: panelWidth,
-                  width: panelLength,
-                  decoration: BoxDecoration(
-                    color: Colors.black.withOpacity(0.3),
-                    borderRadius: BorderRadius.circular(20),
-                    border: Border.all(color: Colors.white.withOpacity(0.2), width: 1),
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Omkar Durande',
-                        style: TextStyle(
-                          color: Colors.white.withOpacity(0.8),
-                          fontSize: panelLength / 10,
-                          fontWeight: FontWeight.bold,
-                          letterSpacing: 2,
+
+            Positioned(
+              top: positionTop,
+              left: positionLeft,
+              child: Container(
+                height: panelWidth,
+                width: panelLength,
+                decoration: BoxDecoration(
+                  color: Colors.black.withOpacity(0.6),
+                  borderRadius: BorderRadius.circular(20),
+                  border: Border.all(color: Colors.white.withOpacity(0.2), width: 1),
+                ),
+                child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        SizedBox(height: 20, width: panelLength * 0.4),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            //SizedBox(height: 20),
+                            Container(
+                              width: panelLength - panelLength * 0.49,
+                              height: panelWidth - 2.5,
+                              decoration: BoxDecoration(
+                                color: Colors.black.withOpacity(0.5),
+                                borderRadius: BorderRadius.circular(10),
+                                border: Border.all(color: Colors.transparent, width: 0.5),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(20.0),
+                                child: Column(
+                                  children: [
+                                    Text(
+                                      'Omkar Durande',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 42,
+                                        fontWeight: FontWeight.w800,
+                                        fontFamily: 'Montserrat',
+                                        shadows: [
+                                          Shadow(
+                                            offset: Offset(2, 2),
+                                            blurRadius: 6,
+                                            color: Colors.black.withOpacity(0.7),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    SizedBox(height: 20),
+                                    Text(
+                                      'I am a passionate developer with a keen interest in exploring and mastering various technologies. I have experience in Flutter for building mobile applications, and I am currently expanding my knowledge in Artificial Intelligence and Machine Learning. Additionally, I have learned Django for web development, which enables me to create full-stack solutions. I am enthusiastic about combining these skills to build innovative and efficient applications.',
+                                      style: TextStyle(
+                                        color: Colors.white.withOpacity(0.8),
+                                        fontSize: 16,
+                                        letterSpacing: 2.0,
+
+                                        fontWeight: FontWeight.w100,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+
+                            //SizedBox(height: 20),
+                          ],
                         ),
-                      ),
-                      SizedBox(height: panelWidth / 30),
-                      Text(
-                        'Flutter Developer | UI/UX Enthusiast',
-                        style: TextStyle(
-                          color: Colors.white.withOpacity(0.6),
-                          fontSize: panelLength / 25,
-                          letterSpacing: 1.5,
-                        ),
-                      ),
-                    ],
-                  ),
+                      ],
+                    ),
+                  ],
                 ),
               ),
+            ),
           ],
         ),
       ),
