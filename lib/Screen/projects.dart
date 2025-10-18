@@ -129,7 +129,7 @@ class _ProjectsPageState extends State<ProjectsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.transparent,
+      //backgroundColor: Colors.black.withOpacity(0.45),
       extendBodyBehindAppBar: true,
       body: Stack(
         children: [
@@ -144,10 +144,18 @@ class _ProjectsPageState extends State<ProjectsPage> {
                   child: VideoPlayer(_controller),
                 ),
               ),
+            )
+          else
+            Center(
+              child: Container(
+                height: MediaQuery.of(context).size.height,
+                width: MediaQuery.of(context).size.width,
+                decoration: BoxDecoration(color: Colors.black.withOpacity(0.9)),
+              ),
             ),
 
           // 🖤 Dark Overlay for readability
-          Container(color: Colors.black.withOpacity(0.55)),
+          Container(color: Colors.black.withOpacity(0.7)),
 
           // 🧱 Page Content
           Padding(

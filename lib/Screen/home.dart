@@ -104,18 +104,19 @@ class _Homepage extends State<Home> {
                   child: Container(
                     height: MediaQuery.of(context).size.height,
                     width: MediaQuery.of(context).size.width,
-                    decoration: BoxDecoration(color: const Color.fromARGB(31, 33, 34, 15)),
+                    decoration: BoxDecoration(color: Colors.black.withOpacity(0.9)),
                   ),
                 ),
+
               Container(
-                // color: Colors.black.withOpacity(0.4), // 0.5 = 50% darkness
+                // color: Colors.black.withOpacity(0.9), // 0.5 = 50% darkness
               ),
               // Foreground content
               SafeArea(
                 child: Column(
                   children: [
                     const SizedBox(height: 20),
-                   // Row(mainAxisAlignment: MainAxisAlignment.center, children: [CustomAppbar()]),
+                    // Row(mainAxisAlignment: MainAxisAlignment.center, children: [CustomAppbar()]),
 
                     // Add more content here
                   ],
