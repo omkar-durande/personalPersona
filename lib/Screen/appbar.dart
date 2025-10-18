@@ -1,17 +1,19 @@
 import 'package:animationweb/Screen/home.dart';
+import 'package:animationweb/main.dart';
 import 'package:animationweb/widget/loadingarc.dart';
 import 'package:flutter/material.dart';
 
 class CustomAppbar extends StatefulWidget {
-  const CustomAppbar({Key? key}) : super(key: key);
+  final Function(int)? onMenuSelect; // callback to parent
+  const CustomAppbar({Key? key, this.onMenuSelect}) : super(key: key);
+
   @override
-  AppBarState createState() {
-    return AppBarState();
-  }
+  AppBarState createState() => AppBarState();
 }
 
 class AppBarState extends State<CustomAppbar> {
   late double appbarwidth;
+
   @override
   Widget build(BuildContext context) {
     appbarwidth = MediaQuery.of(context).size.width * 0.9;
@@ -25,68 +27,46 @@ class AppBarState extends State<CustomAppbar> {
           height: 60,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
-            color: Color(0xFF1C1C1C),
+            color: const Color(0xFF1C1C1C),
           ),
           child: Padding(
-            padding: EdgeInsetsGeometry.only(left: 10),
-            child: Padding(
-              padding: const EdgeInsets.only(left: 10),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  RotatingArcRing(),
-                  Spacer(),
-                  TextButton(
-                    onPressed: () {
-                      setState(() {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
-                        print("omkar");
-                      });
-                    },
-                    child: Text("Home", style: TextStyle(color: Color(0xFF94938D), fontSize: 12)),
-                  ),
-                  Spacer(),
+            padding: const EdgeInsets.only(left: 10),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                RotatingArcRing(),
+                const Spacer(),
 
-                  TextButton(
-                    onPressed: () {},
-                    child: Text(
-                      "Projects",
-                      style: TextStyle(color: Color(0xFF94938D), fontSize: 12),
-                    ),
+                // Home
+                TextButton(
+                  onPressed: () => widget.onMenuSelect?.call(0),
+                  child: const Text(
+                    "Home",
+                    style: TextStyle(color: Color(0xFF94938D), fontSize: 12),
                   ),
-                  Spacer(),
-                  TextButton(
-                    onPressed: () {},
-                    child: Text(
-                      "About us",
-                      style: TextStyle(color: Color(0xFF94938D), fontSize: 12),
-                    ),
+                ),
+                const Spacer(),
+
+                // Projects
+                TextButton(
+                  onPressed: () => widget.onMenuSelect?.call(1),
+                  child: const Text(
+                    "Projects",
+                    style: TextStyle(color: Color(0xFF94938D), fontSize: 12),
                   ),
-                  Spacer(),
-                  TextButton(
-                    onPressed: () {},
-                    child: Text(
-                      "Contact us",
-                      style: TextStyle(color: Color(0xFF94938D), fontSize: 12),
-                    ),
-                    style: ButtonStyle(
-                      overlayColor: MaterialStateProperty.resolveWith<Color?>((
-                        Set<MaterialState> states,
-                      ) {
-                        if (states.contains(MaterialState.pressed)) {
-                          return const Color.fromARGB(
-                            255,
-                            13,
-                            12,
-                            12,
-                          ).withOpacity(0.3); // When pressed
-                        }
-                        return null; // Default behavior
-                      }),
-                    ),
+                ),
+                const Spacer(),
+
+
+                // Contact
+                TextButton(
+                  onPressed: () => widget.onMenuSelect?.call(3),
+                  child: const Text(
+                    "Contact us",
+                    style: TextStyle(color: Color(0xFF94938D), fontSize: 12),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         ),
