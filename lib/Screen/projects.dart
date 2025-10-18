@@ -5,7 +5,7 @@ import 'package:video_player/video_player.dart'; // 🎥 import video package
 class Project {
   final String title;
   final String description;
-  final String url;
+  //final String url;
   final List<String> tags;
   final IconData icon;
 
@@ -98,7 +98,7 @@ class _ProjectsPageState extends State<ProjectsPage> {
                     .toList(),
               ),
               const SizedBox(height: 12),
-              SelectableText(project.url),
+              // SelectableText(project.url),
             ],
           ),
           actions: [
