@@ -12,7 +12,7 @@ class Project {
   Project({
     required this.title,
     required this.description,
-    required this.url,
+    // required this.url,
     this.tags = const [],
     this.icon = Icons.folder,
   });
@@ -23,28 +23,28 @@ final List<Project> sampleProjects = [
     title: 'Portfolio Website',
     description:
         'A responsive portfolio website built with Flutter Web. Showcases projects, blog posts and contact form.',
-    url: 'https://example.com/portfolio',
+    // url: 'https://example.com/portfolio',
     tags: ['Flutter', 'Web', 'Responsive'],
     icon: Icons.web,
   ),
   Project(
     title: 'Task Manager',
     description: 'Simple task manager app with local persistence and drag & drop reordering.',
-    url: 'https://example.com/task-manager',
+    // url: 'https://example.com/task-manager',
     tags: ['Flutter', 'Mobile', 'SQLite'],
     icon: Icons.check_circle_outline,
   ),
   Project(
     title: 'Weather App',
     description: 'Clean weather UI using a free weather API with caching and animations.',
-    url: 'https://example.com/weather-app',
+    // url: 'https://example.com/weather-app',
     tags: ['API', 'Animations', 'Caching'],
     icon: Icons.wb_sunny,
   ),
   Project(
     title: 'Chat UI',
     description: 'Real-time styled chat interface prototype with message bubbles and avatars.',
-    url: 'https://example.com/chat-ui',
+
     tags: ['UI', 'Realtime', 'Firebase'],
     icon: Icons.chat_bubble_outline,
   ),
@@ -102,16 +102,16 @@ class _ProjectsPageState extends State<ProjectsPage> {
             ],
           ),
           actions: [
-            TextButton(
-              onPressed: () {
-                Clipboard.setData(ClipboardData(text: project.url));
-                Navigator.of(context).pop();
-                ScaffoldMessenger.of(
-                  context,
-                ).showSnackBar(const SnackBar(content: Text('Project URL copied to clipboard')));
-              },
-              child: const Text('Copy URL'),
-            ),
+            // TextButton(
+            //   onPressed: () {
+            //     Clipboard.setData(ClipboardData(text: project.url));
+            //     Navigator.of(context).pop();
+            //     ScaffoldMessenger.of(
+            //       context,
+            //     ).showSnackBar(const SnackBar(content: Text('Project URL copied to clipboard')));
+            //   },
+            //   child: const Text('Copy URL'),
+            //),
             TextButton(onPressed: () => Navigator.of(context).pop(), child: const Text('Close')),
           ],
         );
